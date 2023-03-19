@@ -12,7 +12,7 @@ An image recognition pipeline in AWS, using two parallel EC2 instances, S3, SQS,
 
 **Description**: You have to build an image recognition pipeline in AWS, using two EC2 instances, S3, SQS, and Rekognition. The assignment must be done in Java on Amazon Linux VMs. For the rest of the description, you should refer to the figure below:
 
-![AWS Archtecture](/CS-643-Programming-Assignment-1/files/AWS_Arch.jpg?raw=true "AWS Archtecture")
+![AWS Archtecture](https://github.com/abe-min/CS-643-Programming-Assignment-1/blob/main/files/AWS_Arch.jpg?raw=true "AWS Archtecture")
 
 Your have to create 2 EC2 instances (EC2 A and B in the figure), with Amazon Linux AMI, that will work in parallel. Each instance will run a Java application. Instance A will read 10 images from an S3 bucket that we created (https://njit-cs-643.s3.us-east-1.amazonaws.com) and perform object detection in the images. When a car is detected using Rekognition, with confidence higher than 90%, the index of that image (e.g., 2.jpg) is stored in SQS. Instance B reads indexes of images from SQS as soon as these indexes become available in the queue, and performs text recognition on these images (i.e., downloads them from S3 one by one and uses Rekognition for text recognition). Note that the two instances work in parallel: for example, instance A is processing image 3, while instance B is processing image 1 that was recognized as a car by instance A. When instance A terminates its image processing, it adds index -1 to the queue to signal to instance B that no more indexes will come. When instance B finishes, it prints to a file, in its associated EBS, the indexes of the images that have both cars and text, and also prints the actual text in each image next to its index.
 
@@ -35,7 +35,7 @@ Your have to create 2 EC2 instances (EC2 A and B in the figure), with Amazon Lin
 
 After completion, two Instances My instances are named **EC2 A** and **EC2 B** and looks like this:
 
-![Running EC2 Instances](/CS-643-Programming-Assignment-1/files/Active_Instances.PNG?raw=true "2 Running EC2 Instances")
+![Running EC2 Instances](https://github.com/abe-min/CS-643-Programming-Assignment-1/blob/main/files/Active_Instances.PNG?raw=true "2 Running EC2 Instances")
 
 ### Add IAM roles to the created instances:
 1. Select an IAM role with the following permissions as policies:
@@ -67,7 +67,7 @@ These policies are necessary to use AWS' S#, SQS, and Rekognition services
 
 Once an SSH connection is made to the EC2 instance, it looks like this:
 
-![SSH connection](/CS-643-Programming-Assignment-1/files/SSH_EC2.PNG?raw=true "Active SSH Connection")
+![SSH connection](https://github.com/abe-min/CS-643-Programming-Assignment-1/blob/main/files/SSH_EC2.PNG?raw=true "Active SSH Connection")
 
 
 
@@ -78,14 +78,14 @@ Once an SSH connection is made to the EC2 instance, it looks like this:
 
 #### Running Object Detection program on EC2-A instance:
 1. After executing the command `java -jar aws-object-rekognition-1.0-SNAPSHOT.jar` imaghes that satisfy the condition of containing a car with a confidence rate of >90 will be pushed to the SQS (ImageRecognitionQue).
-![Images Pushed to Que](/CS-643-Programming-Assignment-1/files/SQS_Images_Entry.PNG?raw=true "SQS pushed")
+![Images Pushed to Que](https://github.com/abe-min/CS-643-Programming-Assignment-1/blob/main/files/SQS_Images_Entry.PNG?raw=true "SQS pushed")
 
 2. There are 6 items that are pushed to the queue, having satisfied the above condition
 3. The contents of the ImageRecognitionQue queue:
-![List of Que Content](/CS-643-Programming-Assignment-1/files/SQS_messages_poll.PNG?raw=true "List of Que Content")
+![List of Que Content](https://github.com/abe-min/CS-643-Programming-Assignment-1/blob/main/files/SQS_messages_poll.PNG?raw=true "List of Que Content")
 
 
 #### Running program on EC2-B instance:
 1. The second progam will read from the Que the 6 images were insterted to during the first object recognition progam in EC2 A. Do the same steps from the previosu steps to connect to EC2 B and run the folowing command to excute the second JAVA program (Text recognition): `java -jar aws-text-rekognition-0.0.1-SNAPSHOT.jar > EC2B_output.txt`
-![EC2 B](/CS-643-Programming-Assignment-1/files/ec2-B-TEXT_Detection.PNG?raw=true "EC2 B Running")
+![EC2 B](https://github.com/abe-min/CS-643-Programming-Assignment-1/blob/main/files/ec2-B-TEXT_Detection.PNG?raw=true "EC2 B Running")
 
