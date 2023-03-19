@@ -12,13 +12,13 @@ An image recognition pipeline in AWS, using two parallel EC2 instances, S3, SQS,
 
 **Description**: You have to build an image recognition pipeline in AWS, using two EC2 instances, S3, SQS, and Rekognition. The assignment must be done in Java on Amazon Linux VMs. For the rest of the description, you should refer to the figure below:
 
-![AWS Archtecture](https://github.com/abe-min/CS-643-Programming-Assignment-1/blob/main/files/Learner_Lab_Home.PNG?raw=true "AWS Archtecture")
+![AWS Archtecture](https://github.com/abe-min/CS-643-Programming-Assignment-1/blob/main/files/AWS_Arch.jpg?raw=true "AWS Archtecture")
 
 Your have to create 2 EC2 instances (EC2 A and B in the figure), with Amazon Linux AMI, that will work in parallel. Each instance will run a Java application. Instance A will read 10 images from an S3 bucket that we created (https://njit-cs-643.s3.us-east-1.amazonaws.com) and perform object detection in the images. When a car is detected using Rekognition, with confidence higher than 90%, the index of that image (e.g., 2.jpg) is stored in SQS. Instance B reads indexes of images from SQS as soon as these indexes become available in the queue, and performs text recognition on these images (i.e., downloads them from S3 one by one and uses Rekognition for text recognition). Note that the two instances work in parallel: for example, instance A is processing image 3, while instance B is processing image 1 that was recognized as a car by instance A. When instance A terminates its image processing, it adds index -1 to the queue to signal to instance B that no more indexes will come. When instance B finishes, it prints to a file, in its associated EBS, the indexes of the images that have both cars and text, and also prints the actual text in each image next to its index.
 
 # Assignment Implementation
 1. Login to the Student AWS Learner account through the link sent by the TA.
-![Running EC2 Instances](https://github.com/abe-min/CS-643-Programming-Assignment-1/blob/main/files/Active_Instances.PNG?raw=true "2 Running EC2 Instances")
+![Learner Lab Home](https://github.com/abe-min/CS-643-Programming-Assignment-1/blob/main/files/Learner_Lab_Home.PNG?raw=true "AWS Student Learner Lab Home")
 
 2. Within the Student AWS Learner account, navigate to Courses>ALLv1-38241>Modules>**Learner Lab**.
 3. Click Start Lab and follow the **AWS** link to get to the AWS management console
