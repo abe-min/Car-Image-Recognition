@@ -80,6 +80,8 @@ Once an SSH connection is made to the EC2 instance, it looks like this:
 
 #### Running Object Detection program on EC2-A instance:
 1. After executing the command `java -jar aws-object-rekognition-1.0-SNAPSHOT.jar` imaghes that satisfy the condition of containing a car with a confidence rate of >90 will be pushed to the SQS (ImageRecognitionQue).
+![New Que](https://github.com/abe-min/CS-643-Programming-Assignment-1/blob/main/files/Ques.PNG?raw=true "Created Que")
+
 ![Images Pushed to Que](https://github.com/abe-min/CS-643-Programming-Assignment-1/blob/main/files/SQS_Images_Entry.PNG?raw=true "SQS pushed")
 
 2. There are 6 items that are pushed to the queue, having satisfied the above condition
