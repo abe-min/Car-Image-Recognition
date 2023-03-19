@@ -83,8 +83,8 @@ Once an SSH connection is made to the EC2 instance, it looks like this:
 ![Images Pushed to Que](https://github.com/abe-min/CS-643-Programming-Assignment-1/blob/main/files/SQS_Images_Entry.PNG?raw=true "SQS pushed")
 
 2. There are 6 items that are pushed to the queue, having satisfied the above condition
-3. The contents of the ImageRecognitionQue queue:
 ![New Que](https://github.com/abe-min/CS-643-Programming-Assignment-1/blob/main/files/Ques.PNG?raw=true "Created Que")
+3. The contents of the ImageRecognitionQue queue:
 ![List of Que Content](https://github.com/abe-min/CS-643-Programming-Assignment-1/blob/main/files/SQS_messages_poll.PNG?raw=true "List of Que Content")
 
 
