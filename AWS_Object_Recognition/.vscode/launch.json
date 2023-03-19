@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - AWSObjectRekognition",
+            "request": "launch",
+            "mainClass": "com.aws.ec2.AWSObjectRekognition",
+            "projectName": "aws-object-rekognition"
+        }
+    ]
+}
