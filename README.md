@@ -1,4 +1,4 @@
-# CS 643: Programming Assignment 1
+# Car Image/Text Recognition
 
 ## Assignment Information
 An image recognition pipeline in AWS, using two parallel EC2 instances, S3, SQS, and Rekognition.
